@@ -7,7 +7,6 @@ import {
   Param,
   Delete,
   ParseIntPipe,
-  NotFoundException,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -34,11 +33,7 @@ export class TasksController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateTaskDto: UpdateTaskDto,
   ) {
-    try {
-      return this.tasksService.update(id, updateTaskDto);
-    } catch (error) {
-      throw new NotFoundException();
-    }
+    return this.tasksService.update(id, updateTaskDto);
   }
 
   @Delete(':id')

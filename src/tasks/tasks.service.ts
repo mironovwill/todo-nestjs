@@ -9,21 +9,41 @@ export class TasksService {
 
   @Get()
   findAll() {
-    return this.prisma.task.findMany();
+    try {
+      return this.prisma.task.findMany();
+    } catch (e) {
+      console.log('Cannot get tasks');
+      throw new Error(e);
+    }
   }
 
   create(createTaskDto: CreateTaskDto) {
-    return this.prisma.task.create({ data: createTaskDto });
+    try {
+      return this.prisma.task.create({ data: createTaskDto });
+    } catch (e) {
+      console.log('Cannot create task');
+      throw new Error(e);
+    }
   }
 
   update(id: number, updateTaskDto: UpdateTaskDto) {
-    return this.prisma.task.update({
-      where: { id },
-      data: updateTaskDto,
-    });
+    try {
+      return this.prisma.task.update({
+        where: { id },
+        data: updateTaskDto,
+      });
+    } catch (e) {
+      console.log('Cannot update task');
+      throw new Error(e);
+    }
   }
 
   remove(id: number) {
-    return this.prisma.task.delete({ where: { id } });
+    try {
+      return this.prisma.task.delete({ where: { id } });
+    } catch (e) {
+      console.log('Cannot remove task');
+      throw new Error(e);
+    }
   }
 }
