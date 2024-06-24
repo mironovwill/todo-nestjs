@@ -7,7 +7,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class TasksService {
   constructor(private prisma: PrismaService) {}
 
-  @Get()
   findAll() {
     try {
       return this.prisma.task.findMany();
